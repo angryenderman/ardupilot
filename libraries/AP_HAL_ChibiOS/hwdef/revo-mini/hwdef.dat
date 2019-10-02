@@ -33,6 +33,7 @@ UART_ORDER OTG1 USART3 USART1
 # rcinput is PC6, which is the 3rd "PWM IN" pin (the yellow wire on a
 # revolution board)
 PC6 TIM8_CH1 TIM8 RCIN FLOAT LOW
+#test
 
 # analog pins
 PC3 VDD_5V_SENS ADC1
@@ -133,9 +134,8 @@ define HAL_BARO_MS5611_I2C_ADDR 0x77
 define HAL_PROBE_EXTERNAL_I2C_BAROS
 
 # SPI devices
-SPIDEV mpu6000   SPI1 DEVID1 MPU_CS   MODE3 1*MHZ 8*MHZ 
+SPIDEV mpu6000   SPI1 DEVID1 MPU_CS   MODE3 1*MHZ 8*MHZ
 SPIDEV dataflash SPI3 DEVID1 FLASH_CS MODE3 1*MHZ 8*MHZ
 
 # 8 PWM available by default
 define BOARD_PWM_COUNT_DEFAULT 8
-
