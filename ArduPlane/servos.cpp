@@ -348,6 +348,7 @@ void Plane::set_servos_idle(void)
     SRV_Channels::set_output_scaled(SRV_Channel::k_elevator, servo_value);
     SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, servo_value);
     SRV_Channels::set_output_to_trim(SRV_Channel::k_throttle);
+    SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 0);
 
     SRV_Channels::output_ch_all();
 }
@@ -363,7 +364,13 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
-    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
+    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
+    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
+    if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > min_throttle) {
+         SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
+     } else {
+        SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 0);
+     }
 
 
 
@@ -508,7 +515,13 @@ void Plane::set_servos_controlled(void)
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle,
                                     constrain_int16(SRV_Channels::get_output_scaled(SRV_Channel::k_throttle), min_throttle, max_throttle));
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, constrain_int16(SRV_Channels::get_output_scaled(SRV_Channel::k_throttle), min_throttle, max_throttle));
-    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
+    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
+     if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > min_throttle) {
+         SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
+     } else {
+        SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 0);
+     }
+     
 
     if (!hal.util->get_soft_armed()) {
         if (arming.arming_required() == AP_Arming::Required::YES_ZERO_PWM) {
