@@ -367,22 +367,6 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
 
-    //gcs().send_text(MAV_SEVERITY_CRITICAL, "throttle %i", throttle);
-
-    //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
-    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
-    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
-
-    //SRV_Channels::set_output_to_max( SRV_Channel::k_scripting1);
-
-
-    //if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > min_throttle) {
-    //     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
-    // } else {
-    //    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 0);
-    // }
-
-
     if (throttle > 5) {
           SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
     } else {
@@ -552,6 +536,12 @@ void Plane::set_servos_controlled(void)
         if (g.throttle_suppress_manual) {
             // manual pass through of throttle while throttle is suppressed
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
+             if (get_throttle_input(true) > 5) {
+                  SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
+               } else {
+                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
+               }
+            
         }
     } else if (control_mode == &mode_stabilize ||
                control_mode == &mode_training ||
@@ -565,6 +555,13 @@ void Plane::set_servos_controlled(void)
             // manual pass through of throttle while in FBWA or
             // STABILIZE mode with THR_PASS_STAB set
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
+
+            if (get_throttle_input(true) > 5) {
+                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
+            } else {
+                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
+            }
+
         } else {
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle,
                                             constrain_int16(get_throttle_input(true), min_throttle, max_throttle));                    
@@ -573,6 +570,12 @@ void Plane::set_servos_controlled(void)
                guided_throttle_passthru) {
         // manual pass through of throttle while in GUIDED
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
+            if (get_throttle_input(true) > 5) {
+                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
+            } else {
+                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
+            }
+
 
     } else if (quadplane.in_vtol_mode()) {
         int16_t fwd_thr = 0;
