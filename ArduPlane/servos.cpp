@@ -351,6 +351,8 @@ void Plane::set_servos_idle(void)
     
 
     SRV_Channels::output_ch_all();
+
+    SRV_Channels::set_output_min_max(SRV_Channel::k_scripting1, 1100, 1900);
 }
 
 /*
