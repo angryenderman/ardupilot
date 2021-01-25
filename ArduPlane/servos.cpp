@@ -362,6 +362,7 @@ void Plane::set_servos_manual_passthrough(void)
     SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, channel_rudder->get_control_in_zero_dz());
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
+    SRV_Channels::set_output_scaled(SRV_Channel::k_choke, throttle);
 
     if (quadplane.available() && (quadplane.options & QuadPlane::OPTION_IDLE_GOV_MANUAL)) {
         // for quadplanes it can be useful to run the idle governor in MANUAL mode
@@ -372,6 +373,7 @@ void Plane::set_servos_manual_passthrough(void)
         g2.ice_control.update_idle_governor(min_throttle);
         throttle = MAX(throttle, min_throttle);
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_choke, throttle);
     }
 }
 
@@ -502,7 +504,8 @@ void Plane::set_servos_controlled(void)
 
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle,
                                     constrain_int16(SRV_Channels::get_output_scaled(SRV_Channel::k_throttle), min_throttle, max_throttle));
-    
+    SRV_Channels::set_output_scaled(SRV_Channel::k_choke, constrain_int16(SRV_Channels::get_output_scaled(SRV_Channel::k_throttle), min_throttle, max_throttle));
+
     if (!hal.util->get_soft_armed()) {
         if (arming.arming_required() == AP_Arming::Required::YES_ZERO_PWM) {
             SRV_Channels::set_output_limit(SRV_Channel::k_throttle, SRV_Channel::Limit::ZERO_PWM);
@@ -535,14 +538,19 @@ void Plane::set_servos_controlled(void)
             // manual pass through of throttle while in FBWA or
             // STABILIZE mode with THR_PASS_STAB set
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
+            SRV_Channels::set_output_scaled(SRV_Channel::k_choke, get_throttle_input(true));
         } else {
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle,
                                             constrain_int16(get_throttle_input(true), min_throttle, max_throttle));
+               SRV_Channels::set_output_scaled(SRV_Channel::k_choke,
+                                            constrain_int16(get_throttle_input(true), min_throttle, max_throttle));                             
         }
     } else if (control_mode->is_guided_mode() &&
                guided_throttle_passthru) {
         // manual pass through of throttle while in GUIDED
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
+        SRV_Channels::set_output_scaled(SRV_Channel::k_choke, get_throttle_input(true));
+        
     } else if (quadplane.in_vtol_mode()) {
         int16_t fwd_thr = 0;
         // if armed and not spooled down ask quadplane code for forward throttle
