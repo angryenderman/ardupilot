@@ -477,6 +477,15 @@ void Plane::throttle_watt_limiter(int8_t &min_throttle, int8_t &max_throttle)
  */
 void Plane::set_servos_controlled(void)
 {
+    
+if (get_throttle_input(true) > 5) {
+                  SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
+               } else {
+                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
+               }
+
+
+
     if (flight_stage == AP_Vehicle::FixedWing::FLIGHT_LAND) {
         // allow landing to override servos if it would like to
         landing.override_servos();
