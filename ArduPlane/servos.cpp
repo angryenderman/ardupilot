@@ -384,9 +384,9 @@ void Plane::set_servos_manual_passthrough(void)
 
 
     if (throttle > 5) {
-          SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -100);
+          SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -1000);
     } else {
-        SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 1000);
     }
 
 
