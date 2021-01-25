@@ -373,7 +373,7 @@ void Plane::set_servos_manual_passthrough(void)
         g2.ice_control.update_idle_governor(min_throttle);
         throttle = MAX(throttle, min_throttle);
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_choke, throttle);
+        
     }
 }
 
@@ -525,6 +525,7 @@ void Plane::set_servos_controlled(void)
         if (g.throttle_suppress_manual) {
             // manual pass through of throttle while throttle is suppressed
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
+            SRV_Channels::set_output_scaled(SRV_Channel::k_choke, get_throttle_input(true)); //A&
         }
     } else if (control_mode == &mode_stabilize ||
                control_mode == &mode_training ||
@@ -550,7 +551,7 @@ void Plane::set_servos_controlled(void)
         // manual pass through of throttle while in GUIDED
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
         SRV_Channels::set_output_scaled(SRV_Channel::k_choke, get_throttle_input(true));
-        
+
     } else if (quadplane.in_vtol_mode()) {
         int16_t fwd_thr = 0;
         // if armed and not spooled down ask quadplane code for forward throttle
