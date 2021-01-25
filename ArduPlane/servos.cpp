@@ -352,7 +352,7 @@ void Plane::set_servos_idle(void)
 
     SRV_Channels::output_ch_all();
 
-    SRV_Channels::set_output_min_max(SRV_Channel::k_scripting1, 1100, 1900);
+    
 }
 
 /*
@@ -367,7 +367,11 @@ void Plane::set_servos_manual_passthrough(void)
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
     //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
-    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
+    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
+
+    SRV_Channels::set_output_to_max( SRV_Channel::k_scripting1);
+
+
     //if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > min_throttle) {
     //     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
     // } else {
