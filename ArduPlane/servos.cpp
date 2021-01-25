@@ -381,12 +381,14 @@ void Plane::set_servos_manual_passthrough(void)
     // } else {
     //    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 0);
     // }
-    
-/*
-    if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 5) {
-          SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -200);
+
+
+    if (throttle > 5) {
+          SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -100);
+    } else {
+        SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
     }
-*/
+
 
 
     if (quadplane.available() && (quadplane.options & QuadPlane::OPTION_IDLE_GOV_MANUAL)) {
