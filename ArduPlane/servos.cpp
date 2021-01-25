@@ -18,6 +18,7 @@
 
 #include "Plane.h"
 #include <utility>
+#include <GCS_MAVLink/GCS.h>
 
 /*****************************************
 * Throttle slew limit
@@ -365,6 +366,9 @@ void Plane::set_servos_manual_passthrough(void)
     SRV_Channels::set_output_scaled(SRV_Channel::k_rudder, channel_rudder->get_control_in_zero_dz());
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
+
+    gcs().send_text(MAV_SEVERITY_CRITICAL, "throttle %i", throttle);
+
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
     //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
     //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
@@ -377,11 +381,12 @@ void Plane::set_servos_manual_passthrough(void)
     // } else {
     //    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 0);
     // }
-
+    
+/*
     if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 5) {
           SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -200);
     }
-
+*/
 
 
     if (quadplane.available() && (quadplane.options & QuadPlane::OPTION_IDLE_GOV_MANUAL)) {
