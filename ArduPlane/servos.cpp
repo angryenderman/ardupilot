@@ -367,7 +367,7 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
 
-    gcs().send_text(MAV_SEVERITY_CRITICAL, "throttle %i", throttle);
+    //gcs().send_text(MAV_SEVERITY_CRITICAL, "throttle %i", throttle);
 
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
     //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
@@ -384,9 +384,9 @@ void Plane::set_servos_manual_passthrough(void)
 
 
     if (throttle > 5) {
-          SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -1000);
+          SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
     } else {
-        SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 1000);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
     }
 
 
