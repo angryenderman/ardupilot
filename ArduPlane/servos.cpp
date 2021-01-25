@@ -363,7 +363,7 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
-    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1);
+    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1));
 
     if (quadplane.available() && (quadplane.options & QuadPlane::OPTION_IDLE_GOV_MANUAL)) {
         // for quadplanes it can be useful to run the idle governor in MANUAL mode
@@ -506,7 +506,7 @@ void Plane::set_servos_controlled(void)
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle,
                                     constrain_int16(SRV_Channels::get_output_scaled(SRV_Channel::k_throttle), min_throttle, max_throttle));
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, constrain_int16(SRV_Channels::get_output_scaled(SRV_Channel::k_throttle), min_throttle, max_throttle));
-    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1);
+    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1));
 
     if (!hal.util->get_soft_armed()) {
         if (arming.arming_required() == AP_Arming::Required::YES_ZERO_PWM) {
@@ -528,7 +528,7 @@ void Plane::set_servos_controlled(void)
             // manual pass through of throttle while throttle is suppressed
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
             //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, get_throttle_input(true)); //A&
-            SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1);
+            SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1));
         }
     } else if (control_mode == &mode_stabilize ||
                control_mode == &mode_training ||
@@ -549,14 +549,14 @@ void Plane::set_servos_controlled(void)
                                             constrain_int16(get_throttle_input(true), min_throttle, max_throttle));
                //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1,
                                            // constrain_int16(get_throttle_input(true), min_throttle, max_throttle));     
-                                            SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1);                        
+                                            SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1));                        
         }
     } else if (control_mode->is_guided_mode() &&
                guided_throttle_passthru) {
         // manual pass through of throttle while in GUIDED
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
         //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, get_throttle_input(true));
-        SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1);
+        SRV_Channels::set_output_pwm(SRV_Channel::k_scripting1,SRV_Channels::get_output_pwm(SRV_Channel::k_throttle,1));
 
     } else if (quadplane.in_vtol_mode()) {
         int16_t fwd_thr = 0;
