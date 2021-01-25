@@ -364,8 +364,8 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
     //SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, throttle);
-    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
-    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
+    //SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1, 100 * SRV_Channels::get_output_scaled(SRV_Channel::k_throttle));
+    SRV_Channels::set_output_scaled( SRV_Channel::k_scripting1,  channel_throttle->get_control_in_zero_dz());
     //if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > min_throttle) {
     //     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 100);
     // } else {
