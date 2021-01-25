@@ -18,7 +18,7 @@
 
 #include "Plane.h"
 #include <utility>
-#include <GCS_MAVLink/GCS.h>
+//#include <GCS_MAVLink/GCS.h>
 
 /*****************************************
 * Throttle slew limit
