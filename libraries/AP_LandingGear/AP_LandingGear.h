@@ -79,6 +79,8 @@ public:
     uint32_t get_gear_state_duration_ms();
     uint32_t get_wow_state_duration_ms();
 
+    uint32_t lastmove();
+
     static const struct AP_Param::GroupInfo        var_info[];
     
     void update(float height_above_ground_m);
