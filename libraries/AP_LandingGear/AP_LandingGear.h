@@ -79,7 +79,8 @@ public:
     uint32_t get_gear_state_duration_ms();
     uint32_t get_wow_state_duration_ms();
 
-    uint32_t lastmove();
+    
+    uint32_t get_lastmove();
 
     static const struct AP_Param::GroupInfo        var_info[];
     
@@ -121,6 +122,8 @@ private:
     
     LG_LandingGear_State gear_state_current = LG_UNKNOWN;
     uint32_t last_gear_event_ms;
+
+    uint32_t lastmove;
 
     /// retract - retract landing gear
     void retract();

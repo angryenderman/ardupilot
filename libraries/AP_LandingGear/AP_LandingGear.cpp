@@ -199,6 +199,11 @@ uint32_t AP_LandingGear::get_gear_state_duration_ms()
     return AP_HAL::millis() - last_gear_event_ms;
 }
 
+uint32_t AP_LandingGear::get_lastmove()
+{
+    return lastmove;
+}
+
 uint32_t AP_LandingGear::get_wow_state_duration_ms()
 {
     if (last_wow_event_ms == 0) {
