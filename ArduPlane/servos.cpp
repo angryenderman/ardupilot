@@ -685,7 +685,7 @@ void Plane::set_landing_gear(void)
     }
     gear.last_flight_stage = flight_stage;
 
-    if (AP_HAL::millis() - g2.landing_gear.get_lastmove() >(uint32_t)2000) {
+    if (AP_HAL::millis() - g2.landing_gear.get_lastmove() >(uint32_t)5000) {
         SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
     }
 
