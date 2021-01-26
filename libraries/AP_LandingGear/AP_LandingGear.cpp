@@ -131,6 +131,7 @@ void AP_LandingGear::deploy()
     SRV_Channels::set_output_limit(SRV_Channel::k_landing_gear_control, SRV_Channel::Limit::MAX);
     //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, -4500);
+     last_gear_event_ms = AP_HAL::millis();
     //hal.scheduler->delay(1000);
     //SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
@@ -154,6 +155,7 @@ void AP_LandingGear::retract()
 
     //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, 4500);
+     last_gear_event_ms = AP_HAL::millis();
     //hal.scheduler->delay(1000);
     //SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
