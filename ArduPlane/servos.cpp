@@ -687,7 +687,7 @@ void Plane::set_landing_gear(void)
     //gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",g2.landing_gear.get_wow_state_duration_ms());
 
     
-    gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",(int)g2.landing_gear.get_lastmove();
+    //gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",(int)g2.landing_gear.get_lastmove();
 
     //if (g2.landing_gear.lastmove>(uint32_t)2000) {
     //    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
