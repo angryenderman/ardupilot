@@ -685,7 +685,7 @@ void Plane::set_landing_gear(void)
     }
     gear.last_flight_stage = flight_stage;
     //gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",g2.landing_gear.get_wow_state_duration_ms());
-    gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",g2.landing_gear.get_gear_state_duration_ms());
+    gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",(unsigned long)g2.landing_gear.get_gear_state_duration_ms());
 
 
 }
