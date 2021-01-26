@@ -689,15 +689,7 @@ void Plane::set_landing_gear(void)
 
 }
 
-void Plane::set_landing_gear_dead(void)
-{
-    //g2.landing_gear.setdeadgear();
-    //AP_LandingGear::setdeadgear();
 
-    gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i", (int)5000);
-    //AP_LandingGear::get_wow_state_duration_ms()
-
-}
 
 
 
