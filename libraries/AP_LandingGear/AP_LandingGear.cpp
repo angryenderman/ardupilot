@@ -168,10 +168,6 @@ void AP_LandingGear::retract()
     }
 }
 
-void AP_LandingGear::setdeadgear()
-{
-    
-}
 
 bool AP_LandingGear::deployed()
 {

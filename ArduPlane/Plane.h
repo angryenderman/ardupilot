@@ -1033,7 +1033,6 @@ private:
     void set_servos_old_elevons(void);
     void set_servos_flaps(void);
     void set_landing_gear(void);
-    void set_landing_gear_dead(void);
     void dspoiler_update(void);
     void airbrake_update(void);
     void servo_output_mixers(void);
