@@ -132,6 +132,7 @@ void AP_LandingGear::deploy()
     //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, -4500);
      lastmove = AP_HAL::millis();
+     gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",(int)lastmove();
     //hal.scheduler->delay(1000);
     //SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
