@@ -685,9 +685,9 @@ void Plane::set_landing_gear(void)
     }
     gear.last_flight_stage = flight_stage;
     //gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",g2.landing_gear.get_wow_state_duration_ms());
-    gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",(int)g2.landing_gear.get_gear_state_duration_ms());
+    gcs().send_text(MAV_SEVERITY_INFO, "LandingGear: %i",(int)g2.landing_gear.get_wow_state_duration_ms());
 
-    if (g2.landing_gear.get_gear_state_duration_ms()>(uint32_t)2000) {
+    if (g2.landing_gear.get_wow_state_duration_ms()>(uint32_t)2000) {
         SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
     }
 
