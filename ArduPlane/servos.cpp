@@ -685,6 +685,15 @@ void Plane::set_landing_gear(void)
     }
     gear.last_flight_stage = flight_stage;
 }
+
+void Plane::set_landing_gear_dead(void)
+{
+    g2.landing_gear.setdeadgear();
+}
+
+
+
+
 #endif // LANDING_GEAR_ENABLED
 
 /*

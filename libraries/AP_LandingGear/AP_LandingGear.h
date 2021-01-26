@@ -126,6 +126,9 @@ private:
     /// deploy - deploy the landing gear
     void deploy();
 
+    /// set dead - set PWM to 0
+    void setdeadgear();
+
     // log weight on wheels state
     void log_wow_state(LG_WOW_State state);
 
