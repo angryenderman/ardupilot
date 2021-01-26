@@ -132,7 +132,7 @@ void AP_LandingGear::deploy()
     //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, -4500);
     //hal.scheduler->delay(1000);
-    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
+    //SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
     // send message only if output has been configured
     if (!_deployed &&
@@ -155,7 +155,7 @@ void AP_LandingGear::retract()
     //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, 4500);
     //hal.scheduler->delay(1000);
-    SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
+    //SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
     // reset deployed flag
     _deployed = false;
