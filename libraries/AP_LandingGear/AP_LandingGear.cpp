@@ -129,8 +129,9 @@ void AP_LandingGear::deploy()
 {
     // set servo PWM to deployed position
     SRV_Channels::set_output_limit(SRV_Channel::k_landing_gear_control, SRV_Channel::Limit::MAX);
-    SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
+    //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, -4500);
+    hal.scheduler->delay(1000);
     SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
     // send message only if output has been configured
@@ -151,8 +152,9 @@ void AP_LandingGear::retract()
     // set servo PWM to retracted position
     SRV_Channels::set_output_limit(SRV_Channel::k_landing_gear_control, SRV_Channel::Limit::MIN);
 
-    SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
+    //SRV_Channels::limit_slew_rate(SRV_Channel::k_scripting2,5,5);
     SRV_Channels::set_output_scaled(SRV_Channel::k_scripting2, 4500);
+    hal.scheduler->delay(1000);
     SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
 
     // reset deployed flag
