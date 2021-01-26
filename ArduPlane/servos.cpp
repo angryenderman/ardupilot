@@ -477,8 +477,8 @@ void Plane::throttle_watt_limiter(int8_t &min_throttle, int8_t &max_throttle)
  */
 void Plane::set_servos_controlled(void)
 {
-    
-if (get_throttle_input(true) > 5) {
+
+if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 5) {
                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
                } else {
                    SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
@@ -545,11 +545,6 @@ if (get_throttle_input(true) > 5) {
         if (g.throttle_suppress_manual) {
             // manual pass through of throttle while throttle is suppressed
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
-             if (get_throttle_input(true) > 5) {
-                  SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
-               } else {
-                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
-               }
             
         }
     } else if (control_mode == &mode_stabilize ||
@@ -565,11 +560,6 @@ if (get_throttle_input(true) > 5) {
             // STABILIZE mode with THR_PASS_STAB set
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
 
-            if (get_throttle_input(true) > 5) {
-                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
-            } else {
-                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
-            }
 
         } else {
             SRV_Channels::set_output_scaled(SRV_Channel::k_throttle,
@@ -579,11 +569,6 @@ if (get_throttle_input(true) > 5) {
                guided_throttle_passthru) {
         // manual pass through of throttle while in GUIDED
         SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, get_throttle_input(true));
-            if (get_throttle_input(true) > 5) {
-                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
-            } else {
-                SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
-            }
 
 
     } else if (quadplane.in_vtol_mode()) {
