@@ -688,7 +688,7 @@ void Plane::set_landing_gear(void)
 
 void Plane::set_landing_gear_dead(void)
 {
-    g2.landing_gear.setdeadgear();
+    //g2.landing_gear.setdeadgear();
 }
 
 
