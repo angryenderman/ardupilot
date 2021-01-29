@@ -367,7 +367,7 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
 
-    if (throttle > 6) || g2.landing_gear.deployed() {
+    if (throttle > 6 || g2.landing_gear.deployed()) {
           SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
     } else if (throttle < 3) {
         SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
@@ -478,7 +478,7 @@ void Plane::throttle_watt_limiter(int8_t &min_throttle, int8_t &max_throttle)
 void Plane::set_servos_controlled(void)
 {
 
-if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 6) || g2.landing_gear.deployed() {
+if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 6 || g2.landing_gear.deployed()) {
                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
                } else if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) < 3) {
                    SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
