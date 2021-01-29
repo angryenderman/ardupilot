@@ -367,9 +367,9 @@ void Plane::set_servos_manual_passthrough(void)
     int8_t throttle = get_throttle_input(true);
     SRV_Channels::set_output_scaled(SRV_Channel::k_throttle, throttle);
 
-    if (throttle > 5) {
+    if (throttle > 6) {
           SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
-    } else {
+    } else if (throttle < 3) {
         SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
     }
 
@@ -478,9 +478,9 @@ void Plane::throttle_watt_limiter(int8_t &min_throttle, int8_t &max_throttle)
 void Plane::set_servos_controlled(void)
 {
 
-if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 5) {
+if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 6) {
                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
-               } else {
+               } else if (throttle < 3) {
                    SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
                }
 
@@ -685,7 +685,9 @@ void Plane::set_landing_gear(void)
     }
     gear.last_flight_stage = flight_stage;
 
-    if (AP_HAL::millis() - g2.landing_gear.get_lastmove() >(uint32_t)5000) {
+    if (AP_HAL::millis() - g2.landing_gear.get_lastmove() >(uint32_t)3000 && !g2.landing_gear.deployed()){
+        SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
+    } else if (AP_HAL::millis() - g2.landing_gear.get_lastmove() >(uint32_t)180000 && g2.landing_gear.deployed()){
         SRV_Channels::set_output_pwm(SRV_Channel::k_scripting2, 0);
     }
 
