@@ -480,7 +480,7 @@ void Plane::set_servos_controlled(void)
 
 if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) > 6) {
                   SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, -4545);
-               } else if (throttle < 3) {
+               } else if (SRV_Channels::get_output_scaled(SRV_Channel::k_throttle) < 3) {
                    SRV_Channels::set_output_scaled(SRV_Channel::k_scripting1, 4545);
                }
 
